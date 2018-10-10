@@ -31,11 +31,15 @@ module DeepDouble
       end
 
       def validate_key(key)
-        return if key.is_a?(Array)
+        return if valid_key?(key)
         raise ArgumentError,
           "Keys in a result table must by Arrays representing argument " +
           "lists (the empty array represents 0 arguments). The following " +
           "key was invalid: #{key.inspect}"
+      end
+
+      def valid_key?(key)
+        key.is_a?(Array) || key == :default
       end
     end
 

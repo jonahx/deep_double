@@ -32,11 +32,15 @@ module DeepDouble
     end
 
     def result(args)
-      @result_table[args]
+      if @result_table.key?(args)
+        @result_table[args]
+      else
+        @result_table[:default]
+      end
     end
 
     def value_defined_for?(args)
-      @result_table.key?(args)
+      @result_table.key?(args) || @result_table.key?(:default)
     end
   end
 end

@@ -79,6 +79,28 @@ RSpec.describe 'DeepDouble' do
     end
   end
 
+  context 'with valid definition and default value' do
+
+    subject(:valid) do
+      deep_double(
+        methA: {
+          [] => "methA()",
+          [1] => "methA(1)",
+          :default => "Default Value"
+        }
+      )
+    end
+
+    it 'lets you set a default value for unspecified args' do
+      expect(valid.methA('blah')).to eq('Default Value')
+    end
+
+    it 'gives precedence to specific args' do
+      expect(valid.methA).to eq('methA()')
+      expect(valid.methA(1)).to eq('methA(1)')
+    end
+  end
+
   context 'with valid nested definition' do
 
     subject(:valid) do
