@@ -1,15 +1,15 @@
-# Makes a `DeepDouble::Function` recursive, so that `Hash` results are
+# Makes a `DeepDouble::FakeMethod` recursive, so that `Hash` results are
 # automatically converted to `DeepDouble` instances in their own right.
 #
 module DeepDouble
-  class RecursiveFunction
+  class RecursiveFakeMethod
 
-    def initialize(function)
-      @function = function
+    def initialize(fake_method)
+      @fake_method = fake_method
     end
 
     def call(*args)
-      result = @function.call(*args)
+      result = @fake_method.call(*args)
       special_case_transforms(result)
     end
 

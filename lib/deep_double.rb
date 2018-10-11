@@ -4,9 +4,9 @@
 # It drastically reduces the amount of boilerplate compared with rspec.
 #
 
-require 'deep_double/function'
+require 'deep_double/fake_method'
 require 'deep_double/literal'
-require 'deep_double/recursive_function'
+require 'deep_double/recursive_fake_method'
 require "deep_double/version"
 
 module DeepDouble
@@ -45,12 +45,12 @@ module DeepDouble
     end
 
     def create_method(meth)
-      define_singleton_method(meth.to_sym, &function(meth))
+      define_singleton_method(meth.to_sym, &fake_method(meth))
     end
 
-    def function(meth)
-      raw_fn = Function.new(@definition[meth])
-      RecursiveFunction.new(raw_fn)
+    def fake_method(meth)
+      raw_fn = FakeMethod.new(@definition[meth])
+      RecursiveFakeMethod.new(raw_fn)
     end
   end
 end
